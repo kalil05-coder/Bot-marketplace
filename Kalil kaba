@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bot Marketplace</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 20px;
+            background-color: #f4f4f4;
+        }
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        .bot-card {
+            background: white;
+            padding: 20px;
+            margin: 10px 0;
+            border-radius: 8px;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+        }
+        .bot-card h2 {
+            margin-top: 0;
+            color: #333;
+        }
+        .price {
+            color: #2ecc71;
+            font-size: 1.2em;
+            font-weight: bold;
+        }
+        .buy-btn {
+            background: #3498db;
+            color: white;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background 0.3s ease;
+        }
+        .buy-btn:hover {
+            background: #2980b9;
+        }
+        .buy-btn:active {
+            background: #1f6699;
+        }
+        .payment-options {
+            margin-top: 10px;
+            transition: opacity 0.3s ease;
+            opacity: 0;
+        }
+        .payment-options.visible {
+            opacity: 1;
+        }
+        .payment-btn {
+            padding: 8px 16px;
+            margin: 5px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+        .payment-btn.paypal {
+            background: #0070ba;
+            color: white;
+        }
+        .payment-btn.crypto {
+            background: #f1c40f;
+            color: black;
+        }
+
+        /* Responsivité */
+        @media (max-width: 600px) {
+            .bot-card {
+                padding: 10px;
+                margin: 5px 0;
+            }
+            .buy-btn, .payment-btn {
+                width: 100%;
+                box-sizing: border-box;
+                margin: 5px 0;
+            }
+            h1 {
+                font-size: 1.5em;
+            }
+            .price {
+                font-size: 1.1em;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Marketplace de Bots - Binance Trading</h1>
+        <p>Achetez des bots de trading optimisés pour Binance avec PayPal ou Crypto</p>
+
+        <!-- Bot 1 -->
+        <div class="bot-card">
+            <h2>Bot Scalper Binance</h2>
+            <p>Un bot de trading haute fréquence pour Binance, optimisé pour les petits profits rapides.</p>
+            <p class="price">Prix: $99</p>
+            <button class="buy-btn" onclick="showPayment('scalper')" aria-label="Acheter le Bot Scalper Binance">Acheter</button>
+            <div class="payment-options" id="payment-scalper">
+                <h3>Options de paiement:</h3>
+                <button class="payment-btn paypal" onclick="payWithPaypal('Scalper', 99)">PayPal</button>
+                <button class="payment-btn crypto" onclick="payWithCrypto('Scalper', 99)">Crypto (BTC/ETH)</button>
+            </div>
+        </div>
+
+        <!-- Bot 2 -->
+        <div class="bot-card">
+            <h2>Bot Trend Follower</h2>
+            <p>Suit les tendances du marché sur Binance pour maximiser les gains à long terme.</p>
+            <p class="price">Prix: $149</p>
+            <button class="buy-btn" onclick="showPayment('trend')" aria-label="Acheter le Bot Trend Follower">Acheter</button>
+            <div class="payment-options" id="payment-trend">
+                <h3>Options de paiement:</h3>
+                <button class="payment-btn paypal" onclick="payWithPaypal('Trend', 149)">PayPal</button>
+                <button class="payment-btn crypto" onclick="payWithCrypto('Trend', 149)">Crypto (BTC/ETH)</button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        function showPayment(botId) {
+            const paymentDiv = document.getElementById(`payment-${botId}`);
+            if (paymentDiv) {
+                paymentDiv.classList.toggle('visible');
+                paymentDiv.style.display = paymentDiv.classList.contains('visible') ? 'block' : 'none';
+            } else {
+                console.error(`Élément payment-${botId} non trouvé`);
+            }
+        }
+
+        function payWithPaypal(botName, price) {
+            alert(`Paiement PayPal pour ${botName} - $${price}. Redirection vers PayPal...`);
+            // Pour une intégration réelle, utilisez le SDK PayPal ici
+        }
+
+        function payWithCrypto(botName, price) {
+            const yourCryptoAddress = "VOTRE_ADRESSE_CRYPTO_ICI"; // Remplacez par une adresse réelle
+            alert(`Paiement Crypto pour ${botName} - $${price}. Veuillez envoyer à cette adresse: ${yourCryptoAddress}`);
+            // Pour une intégration avancée, générez une adresse unique ou un QR code
+        }
+
+        // Initialisation : cacher les options de paiement au chargement
+        document.querySelectorAll('.payment-options').forEach(div => {
+            div.style.display = 'none';
+        });
+    </script>
+</body>
+</html>
